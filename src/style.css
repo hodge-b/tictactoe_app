@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.app-title{
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin: 2rem 1rem; 
+}
+
+.app-container{
+    display: flex;
+    gap: 1rem;
+}
+
+.win-container{
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 1.5rem;
+
+    text-transform: uppercase;
+    border: 1px solid black;
+}
+
+.wins{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2.5rem 1rem;
+    font-size: 4rem;
+}
+
+.win-title{
+    font-size: 1.3rem;
+    padding: 1rem;
+    border-bottom: 1px solid;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.grid-cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 75px;
+    height: 75px;
+
+    font-size: 2.5rem;
+    border: 1px solid black;
+}
+
+.btn--endturn{
+    margin: 2rem;
+    padding: 1rem;
+    width: 150px;
+    font-size: 1.5rem;
+}
