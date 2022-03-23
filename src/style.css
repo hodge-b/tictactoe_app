@@ -4,6 +4,10 @@
 }
 
 body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     font-family: 'Roboto', sans-serif;
 }
 
@@ -12,17 +16,37 @@ main{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    margin: 2rem 1rem;
+    padding: 1rem;
+
+    user-select: none;
+    border: 1px solid black;
 }
 
 .app-title{
     font-size: 2.5rem;
     text-transform: uppercase;
-    margin: 2rem 1rem; 
+    margin: 3rem 1rem; 
 }
 
 .app-container{
     display: flex;
     gap: 1rem;
+}
+
+.app-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    margin: 2rem 1rem;
+    width: 90%;
+
+    border: 1px solid black;
+    font-size: 2rem;
+    text-transform: uppercase;
 }
 
 .win-container{
@@ -33,6 +57,14 @@ main{
 
     text-transform: uppercase;
     border: 1px solid black;
+}
+
+.win-left{
+    box-shadow: inset 0px 0px 5px blue;
+}
+
+.win-right{
+    box-shadow: inset 0px 0px 5px red;
 }
 
 .wins{
@@ -70,6 +102,6 @@ main{
 .btn--endturn{
     margin: 2rem;
     padding: 1rem;
-    width: 150px;
+    width: 40%;
     font-size: 1.5rem;
 }
