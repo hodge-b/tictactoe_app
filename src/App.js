@@ -1,7 +1,7 @@
 import React from 'react';
 import {nanoid} from 'nanoid';
 import TicGrid from './components/TicGrid';
-import {checkRowsForWin, checkColumnsForWin, checDiagonalsForWin, checkDiagonalsForWin} from './utility/checkGrid';
+import {checkRowsForWin, checkColumnsForWin, checkDiagonalsForWin, checkForFullGrid} from './utility/checkGrid';
 import './style.css'
 
 
@@ -43,6 +43,7 @@ export default function App(){
         const rowSequenceIndex      = checkRowsForWin(grid);
         const columnSequenceIndex   = checkColumnsForWin(grid);
         const diagonalSequenceIndex = checkDiagonalsForWin(grid);
+        const isGridFull            = checkForFullGrid(grid);
         let winningPlayer = '';
 
         if(rowSequenceIndex !== undefined){
@@ -54,6 +55,8 @@ export default function App(){
         }else if(diagonalSequenceIndex !== undefined){
             winningPlayer = grid[diagonalSequenceIndex][0].value;
             endGame(winningPlayer, 'diagonal', diagonalSequenceIndex);
+        }else if(isGridFull){
+            endGame('', 'draw', 0);
         }
 
     },[grid])
@@ -63,8 +66,10 @@ export default function App(){
 
         // update game state to reflect the winner
         setGame(prevGame => {
-            return winningPlayer === 'X' ? {...prevGame, isPlayer01Win: true, isWon: true, previousWinner: 'X'}
-            : {...prevGame, isPlayer01Win: false, isWon: true, previousWinner: 'O'};
+            return winningPlayer === 'X' ? 
+            {...prevGame, isPlayer01Win: true, isWon: true, previousWinner: 'X'}: 
+            winningPlayer === 'O' ? 
+            {...prevGame, isPlayer01Win: false, isWon: true, previousWinner: 'O'}: {...prevGame, isPlayer01Win: false, isWon: true, previousWinner: 'draw'};
         });
 
         // update grid isWinningCell so it displays the right color in cell
@@ -102,7 +107,8 @@ export default function App(){
 
             return (
                 winningPlayer === 'X' ? {...prevGame, player01WinCount: (playerOneWin + 1)} 
-                : {...prevGame, player02WinCount: (playerTwoWin + 1)}
+                : winningPlayer === 'O' ? {...prevGame, player02WinCount: (playerTwoWin + 1)}
+                : {...prevGame}
             )
         })
 
@@ -178,7 +184,7 @@ export default function App(){
             </div>
             <br />
             <br />
-            <h2 className='app-message'>{game.isWon? game.isPlayer01Win ? 'X WINS!' : 'O WINS!' : game.isPlayer01Turn ? `X's turn` : `O's turn`}</h2>
+            <h2 className='app-message'>{game.isWon? game.isPlayer01Win ? 'X WINS!' : game.previousWinner === 'draw' ? 'DRAW' : 'O WINS!' : game.isPlayer01Turn ? `X's turn` : `O's turn`}</h2>
             {game.isWon && <button className='btn--endturn' onClick={newGame}>Start New Game</button>}
         </main>
     )

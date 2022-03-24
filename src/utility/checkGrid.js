@@ -70,6 +70,24 @@ export function checkDiagonalsForWin(grid){
     return undefined;
 }
 
+export function checkForFullGrid(grid){
+    
+    let count = 0;
+    grid.map(gridElem => {
+        gridElem.map(cell => {
+            if(cell.value !== ''){
+                count++;
+            }
+        })
+    })
+
+    if(count >= 9){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function copyGrid(grid){
     const newArray = [];
     grid.forEach(item => {
